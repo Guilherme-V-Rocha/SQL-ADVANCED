@@ -1,0 +1,43 @@
+USE LOCADORA
+GO
+
+
+CREATE PROCEDURE SP_DATA_AGORA
+AS
+BEGIN
+	SELECT GETDATE()
+END
+GO
+
+EXEC SP_DATA_AGORA
+GO
+
+
+CREATE PROCEDURE INSERI_ATUALIZA(@clienteId int, @fitaId int)
+	
+AS
+BEGIN
+	UPDATE LOCACAO
+		SET dataDevolucao = GETDATE()
+	WHERE clienteId = @clienteId AND fitaId = @fitaId
+END
+GO
+
+EXEC INSERI_ATUALIZA 1 , 34
+GO
+
+
+CREATE PROCEDURE BUSQ_FILME(@titulo VARCHAR(50))
+AS
+BEGIN
+	SELECT 
+		descricao
+	FROM 
+		FILME
+	WHERE 
+		descricao LIKE '%' + @titulo +'%'
+END
+GO
+
+EXEC BUSQ_FILME 'it'
+GO
